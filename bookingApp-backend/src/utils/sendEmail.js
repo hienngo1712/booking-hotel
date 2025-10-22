@@ -1,5 +1,9 @@
+// Import thư viện nodemailer để gửi email qua SMTP (Simple Mail Transfer Protocol)
 import  nodemailer from 'nodemailer';
 
+// Hàm gửi email xác nhận đặt phòng
+// email: địa chỉ người nhận
+// emailData: đối tượng(object) chứa thông tin đơn đặt phòng
 const SendEmailService = async (email, emailData) => {
     var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -12,7 +16,7 @@ const SendEmailService = async (email, emailData) => {
       });
       
       const info = await transporter.sendMail({
-        from: `"Iambooking" <nguyendinhkien241@gmail.com>`, // sender address
+        from: `"Iambooking" <dovinhdai@gmail.com>`, // sender address
         to: email, // list of receivers
         subject: "Xác nhận hóa đơn đặt phòng khách sạn", // Subject line
         text: "", // plain text body
