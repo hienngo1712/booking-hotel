@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs"; // thuật toán hash (ngoài ra còn có SHA256 và MD5)
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// Tạo mk tạm ngẫu nhiên cho user google
 const generateRandomPassword = () => {
   const randomPassword = Math.random().toString(36).slice(-8); // Tạo chuỗi ngẫu nhiên 8 ký tự
   const salt = bcrypt.genSaltSync(10);
@@ -15,6 +16,7 @@ const generateRandomPassword = () => {
 
 export const register = async (req, res, next) => {
   try {
+    // Băm (hash) mật khẩu người dùng nhập vào
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = new User({

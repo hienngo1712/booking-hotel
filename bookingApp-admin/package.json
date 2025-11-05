@@ -22,7 +22,8 @@
     "sass": "^1.49.9",
     "sweetalert2": "^11.17.2",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.98.0"
+    "webpack": "^5.98.0",
+    "webpack-dev-server": "4.13.3"
   },
   "scripts": {
     "start": "react-scripts start",

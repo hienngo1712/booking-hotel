@@ -40,9 +40,9 @@ const Navbar = () => {
             <button className="navImg">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/800px-Flag_of_Vietnam.svg.png" alt="Việt Nam" />
             </button> 
-            {/* <button className="navSub">
+            <button className="navSub">
               <Link to="/register-hotel">Đăng ký chỗ nghỉ của bạn</Link>
-            </button> */}
+            </button>
 
             <Link className="navInfo" to={`/info/${user._id}`}>
               {user.username}
