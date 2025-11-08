@@ -107,7 +107,7 @@ const NewHotel = ({ inputs, title }) => {
 
               <div className="formInput">
                 <label>Tỉnh/ Thành phố</label>
-                <select id="featured" onChange={handleChange}>
+                <select id="city" onChange={handleChange}>
                   {city.map((c) => {
                     return <option key={c.id} value={c.name}>{c.name}</option>
                   })}
@@ -116,7 +116,7 @@ const NewHotel = ({ inputs, title }) => {
 
               <div className="formInput">
                 <label>Nổi bật</label>
-                <select id="city" onChange={handleChange}>
+                <select id="featured" onChange={handleChange}>
                   <option value={false}>Không</option>
                   <option value={true}>Có</option>
                 </select>
