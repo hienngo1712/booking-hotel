@@ -6,7 +6,7 @@ import { verifyAdmin, verifyHotelier } from '../utils/verifyToken.js';
 const router = express.Router();
 
 //CREATE
-router.post('/:hotelid', verifyHotelier, createRoom);
+router.post('/:hotelId', verifyHotelier, createRoom);
 
 //UPDATE
 router.put('/:id', verifyHotelier, updateRoom)
@@ -16,7 +16,7 @@ router.put('/availability/:roomId/:roomNumber', updateRoomAvailability);
 router.put('/state/:roomId/:roomNumber', updateRoomState)
 
 //DELETE
-router.delete('/:id/:hotelid', verifyHotelier, deleteRoom)
+router.delete('/:id/:hotelId', verifyHotelier, deleteRoom)
 
 //GET
 router.get('/count', countRoom)
