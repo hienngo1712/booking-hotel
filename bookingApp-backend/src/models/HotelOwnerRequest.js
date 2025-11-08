@@ -31,7 +31,8 @@ const HotelOwnerRequestSchema = new mongoose.Schema({
   },
   country: {
     type: String,
-    required: true,
+    required: false,
+    default: "",
   },
   address: {
     type: String,
