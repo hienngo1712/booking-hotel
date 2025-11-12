@@ -109,7 +109,7 @@ const UpdateHotel = ({ inputs, title }) => {
             <form>
               <div className="formInput">
                 <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                  Ảnh: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
                 <input
                   type="file"
@@ -136,13 +136,13 @@ const UpdateHotel = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Featured</label>
+                <label>Nổi bật</label>
                 <select id="featured" onChange={handleChange} value={info.featured}>
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
+                  <option value={false}>Không</option>
+                  <option value={true}>Có</option>
                 </select>
               </div>
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Gửi</button>
             </form>
           </div>
         </div>
