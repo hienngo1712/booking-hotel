@@ -94,11 +94,11 @@ const Book = () => {
     }, [data, days, options, discount]);
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all')
+        fetch('https://open.oapi.vn/location/countries')
             .then((response) => response.json())
             .then((data) => {
-                const sortedCountries = data.sort((a, b) =>
-                    a.name.common.localeCompare(b.name.common)
+                const sortedCountries = data.data.sort((a, b) =>
+                    a.name.localeCompare(b.name)
                 );
                 setCountries(sortedCountries);
             })
@@ -292,12 +292,12 @@ const Book = () => {
                             </div>
                             <div className="form-group">
                                 <select name="country" onChange={handleInputChange} required>
-                                    <option value="">---- Quốc gia ----</option>
-                                    {countries.map((country) => (
-                                        <option key={country.cca3} value={country.name.common}>
-                                            {country.name.common}
+                                  <option value="">---- Quốc gia ----</option>
+                                    {countries.map((country) => {
+                                         return <option key={country.id} value={country.niceName}>
+                                            {country.niceName}
                                         </option>
-                                    ))}
+                                    })}
                                 </select>
                                 <input type="text" name="address" placeholder="Địa chỉ" onChange={handleInputChange} required/>
                             </div>
