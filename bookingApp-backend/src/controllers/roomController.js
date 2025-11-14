@@ -3,7 +3,7 @@ import Hotel from '../models/Hotel.js';
 import { createError } from '../utils/error.js';
 
 export const createRoom =  async (req, res, next) => {
-    const hotelId = req.params.hotelid;
+    const hotelId = req.params.hotelId;
   const newRoom = new Room({ ...req.body, hotelId });
 
   try {
@@ -115,7 +115,7 @@ export const updateRoomState = async (req, res, next) => {
   };
 
 export const deleteRoom = async (req, res, next) => {
-    const hotelId = req.params.hotelid;
+    const hotelId = req.params.hotelId;
     try {
         await Room.findByIdAndDelete(
             req.params.id

@@ -1,7 +1,7 @@
 import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 const NewRoom = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
-  const [hotelid, setHotelid] = useState(undefined);
+  const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
   const [ load, setLoad ] = useState(false);
   
@@ -20,7 +20,11 @@ const NewRoom = ({ inputs, title }) => {
   const handleChange = (e) => {
     setInfo((prev) => ({...prev, [e.target.id]: e.target.value}));
   }
-  
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setHotelId(data[0]._id);
+    }
+  }, [data]);
   const handleClick = async (e) => {
     e.preventDefault();
     setLoad(true);
@@ -37,9 +41,9 @@ const NewRoom = ({ inputs, title }) => {
         ...info,
         roomNumber,
         img: url,
-        hotelId: hotelid
+        hotelId: hotelId
       }
-      await axios.post(`/rooms/${hotelid}`,newRoom)
+      await axios.post(`/rooms/${hotelId}`,newRoom)
       toast.success("Tạo phòng thành công!")
     } catch (err) {
       toast.error("Tạo phòng thất bại!")
@@ -91,7 +95,7 @@ const NewRoom = ({ inputs, title }) => {
               </div>
               <div className="formInput">
                 <label>Choose a hotel</label>
-                <select id="hotelid" onChange={e => setHotelid(e.target.value)}>
+                <select id="hotelId" onChange={e => setHotelId(e.target.value)}>
                   {loading ? "loading" : data && data.map(hotel => {
                     return <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
                   })}
