@@ -108,9 +108,9 @@ export const paymentVnpay = async (req, res, next) => {
     try {
         const vnpay = new VNPay({
             // Thông tin cấu hình bắt buộc
-            tmnCode: 'L3WDVWUW',
-            secureSecret: 'JZ98PRMNP18RZJ7DIAILC3P5HJQ2GOGA',
-            vnpayHost: 'https://sandbox.vnpayment.vn',
+            tmnCode: 'KSKVARLY',
+            secureSecret: 'OZR6QA9K912RUDW4D6C2PAKC20CH5YAP',
+            vnpayHost: 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
             
             // Cấu hình tùy chọn
             testMode: true,                // Chế độ test
@@ -143,8 +143,8 @@ export const checkPaymentVnp = async (req, res, next) => {
   
     try {
       const vnpay = new VNPay({
-        tmnCode: 'L3WDVWUW',
-        secureSecret: 'JZ98PRMNP18RZJ7DIAILC3P5HJQ2GOGA',
+        tmnCode: 'KSKVARLY',
+        secureSecret: ' OZR6QA9K912RUDW4D6C2PAKC20CH5YAP',
       });
   
       // Kiểm tra tính hợp lệ của chữ ký từ VNPay
