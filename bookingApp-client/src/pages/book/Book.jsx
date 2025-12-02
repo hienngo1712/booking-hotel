@@ -63,10 +63,12 @@ const Book = () => {
     function dayDifference(date1, date2) {
         const timeDiff = Math.abs(date2.getTime() - date1.getTime());
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-        return diffDays;
+        return diffDays === 0 ? 1 : diffDays;
     }
 
-    const days = dayDifference(new Date(dates[0].endDate), new Date(dates[0].startDate));
+    const days = (dates && dates.length > 0) 
+    ? dayDifference(new Date(dates[0].endDate), new Date(dates[0].startDate)) 
+    : 0;
 
     const getDatesInRange = (startDate, endDate) => {
       const start = new Date(startDate);
@@ -85,13 +87,18 @@ const Book = () => {
     };
 
     useEffect(() => {
-        if (data && data.price) {
-            const newSubtotal = days * options.room * data.price;
-            const discountValue = discount ? discount.value : 0;
-            setSubtotal(newSubtotal);
-            setTotalPrice(newSubtotal - discountValue);
-        }
-    }, [data, days, options, discount]);
+    if (data && data.price && dates.length > 0) {
+        const roomCount = Number(options.room) || 1;
+        const pricePerNight = Number(data.price) || 0;
+        const currentDays = days > 0 ? days : 1; 
+
+        const newSubtotal = currentDays * roomCount * pricePerNight;
+        const discountValue = discount ? Number(discount.value) : 0;
+        
+        setSubtotal(newSubtotal);
+        setTotalPrice(newSubtotal - discountValue);
+    }
+}, [data, days, options, discount, dates]);
 
     useEffect(() => {
         fetch('https://open.oapi.vn/location/countries')
