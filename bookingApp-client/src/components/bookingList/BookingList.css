@@ -142,6 +142,9 @@ td {
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
 }
 
 .booking-list .status-upcoming {
@@ -155,6 +158,11 @@ td {
 }
 
 .booking-list .status-completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.booking-list .status-paid {
   background-color: #d4edda;
   color: #155724;
 }
