@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
-  admin: null,
+  admin: localStorage.getItem('admin') !== undefined ? JSON.parse(localStorage.getItem('admin')) : null,
   loading: null,
   error: null,
 };
@@ -49,9 +49,8 @@ export const AuthContextProvider = ({ children }) => {
 
   // Xóa localStorage khi ứng dụng khởi động
   useEffect(() => {
-    localStorage.removeItem("admin");
-  }, []);
-
+        localStorage.setItem("admin", JSON.stringify(state.admin));
+    },[state.admin])
   return (
     <AuthContext.Provider
       value={{

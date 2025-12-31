@@ -73,6 +73,12 @@ export const hotelInputs = [
     type: "text",
     placeholder: "description",
   },
+  {
+    id: "ggMap",
+    label: "Link gg map",
+    type: "text",
+    placeholder: "Địa chỉ",
+  }
 ];
 
 export const roomInputs = [

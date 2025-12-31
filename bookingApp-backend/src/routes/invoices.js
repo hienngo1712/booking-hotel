@@ -4,13 +4,18 @@ import { cancelInvoice, checkPaymentVnp, completeInvoice, countInvoice, createIn
 
 const router = express.Router();
 
+// Tạo hóa đơn
 router.post('/', createInvoice);
 router.post('/payment/creadit', paymentCredit);
 router.post('/payment/vnpay', paymentVnpay);
-router.put('/cancel/:invoiceId', cancelInvoice);
-router.put('/complete/:id', completeInvoice)
+
+// chỉnh sửa hóa đơn chỉ áp dụng ở FE giao diện người dùng
+router.put('/cancel/:invoiceId', cancelInvoice); // hủy hóa đơn/ hủy phòng
+router.put('/complete/:id', completeInvoice) // hoàn thành
+// xóa hóa đơn khỏi lịch sửa
 router.delete('/:id', deleteInvoice);
-router.get('/count', countInvoice);
+
+router.get('/count', countInvoice); // đếm số lượng hóa đơn (ở FE admin)
 router.get('/show', showInvoice);
 router.get('/:userId', getInvoiceByUser);
 router.get('/find/:id', getInvoiceById);

@@ -37,8 +37,13 @@ const Hotel = () => {
   const storedData = JSON.parse(localStorage.getItem("searchData")) || {};
 
   // Khởi tạo state với giá trị từ context hoặc localStorage
-  const [dates, setDates] = useState(contextDates?.length ? contextDates : storedData.dates || []);
-  const [options, setOptions] = useState(contextOptions || storedData.options || { adult: 1, children: 0, room: 1 });
+  const [dates, setDates] = useState(
+    contextDates?.length ? contextDates : storedData.dates || []
+  );
+  const [options, setOptions] = useState(
+    contextOptions || storedData.options || { adult: 1, children: 0, room: 1 }
+  );
+  const ggMap = "https://www.google.com/maps/embed?pb=" + data.ggMap
   useEffect(() => {
     if (contextDates && contextDates.length > 0) {
       // Nếu dữ liệu từ SearchContext tồn tại, sử dụng nó
@@ -65,8 +70,10 @@ const Hotel = () => {
     return diffDays;
   } // Tính chênh lệch số ngày
 
-  const days = dayDifference(new Date(dates[0].endDate), new Date(dates[0].startDate));
-  
+  const days = dayDifference(
+    new Date(dates[0].endDate),
+    new Date(dates[0].startDate)
+  );
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -82,7 +89,7 @@ const Hotel = () => {
       newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
     }
 
-    setSlideNumber(newSlideNumber)
+    setSlideNumber(newSlideNumber);
   };
 
   const handleClick = () => {
@@ -91,17 +98,19 @@ const Hotel = () => {
     } else {
       navigate("/login");
     }
-  }
+  };
 
   const formatCurrency = (number) => {
-    return new Intl.NumberFormat('vi-VN').format(number);
+    return new Intl.NumberFormat("vi-VN").format(number);
   };
 
   return (
     <div>
       <Navbar />
       <Header type="list" />
-      {loading ? <Loading/> : (
+      {loading ? (
+        <Loading />
+      ) : (
         <div className="hotelContainer">
           {open && (
             <div className="slider">
@@ -116,7 +125,11 @@ const Hotel = () => {
                 onClick={() => handleMove("l")}
               />
               <div className="sliderWrapper">
-                <img src={data.photos[slideNumber]} alt="" className="sliderImg" />
+                <img
+                  src={data.photos[slideNumber]}
+                  alt=""
+                  className="sliderImg"
+                />
               </div>
               <FontAwesomeIcon
                 icon={faCircleArrowRight}
@@ -126,7 +139,9 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button onClick={handleClick} className="bookNow">Đặt phòng ngay</button>
+            <button onClick={handleClick} className="bookNow">
+              Đặt phòng ngay
+            </button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -136,7 +151,9 @@ const Hotel = () => {
               Vị trí tuyệt vời – Cách trung tâm {data.distance}m
             </span>
             <span className="hotelPriceHighlight">
-              Đặt phòng trên {data.cheapestPrice}<small>VNĐ</small> ở địa điểm này và nhận ngay một chuyến taxi sân bay miễn phí
+              Đặt phòng trên {data.cheapestPrice}
+              <small>VNĐ</small> ở địa điểm này và nhận ngay một chuyến taxi sân
+              bay miễn phí
             </span>
             <div className="hotelImages">
               {data.photos?.slice(0, 5).map((photo, i) => (
@@ -150,7 +167,7 @@ const Hotel = () => {
                 </div>
               ))}
               {data.photos?.length > 5 && (
-                <div 
+                <div
                   className="hotelImgWrapper"
                   onClick={() => handleOpen(5)} // Mở ảnh đầu tiên khi click vào
                 >
@@ -168,39 +185,48 @@ const Hotel = () => {
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
                 <h1 className="hotelTitle">{data.title}</h1>
-                <p className="hotelDesc">
-                  {data.desc}
-                </p>
+                <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Hoàn hảo cho {days === 0 ? 1 + " ngày" : days + " đêm"} ở đây</h1>
+                <h1>
+                  Hoàn hảo cho {days === 0 ? 1 + " ngày" : days + " đêm"} ở đây
+                </h1>
                 <span>
-                  Nằm ở vị trí tuyệt vời, địa điểm này sẽ là nơi nghỉ chân lý tưởng giúp bạn có một kỳ nghỉ không thể nào quên
+                  Nằm ở vị trí tuyệt vời, địa điểm này sẽ là nơi nghỉ chân lý
+                  tưởng giúp bạn có một kỳ nghỉ không thể nào quên
                 </span>
                 <h2>
-                  <b>{days === 0 ? formatCurrency(data.cheapestPrice * options.room) : formatCurrency(days * data.cheapestPrice * options.room)} <small>VNĐ</small></b> ({days === 0 ? 1 + " ngày" : days + " đêm"})
+                  <b>
+                    {days === 0
+                      ? formatCurrency(data.cheapestPrice * options.room)
+                      : formatCurrency(
+                          days * data.cheapestPrice * options.room
+                        )}{" "}
+                    <small>VNĐ</small>
+                  </b>{" "}
+                  ({days === 0 ? 1 + " ngày" : days + " đêm"})
                 </h2>
                 <button onClick={handleClick}>Đặt ngay</button>
 
                 <div className="hotelMap">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d501726.5407260139!2d106.36556659698722!3d10.754618135258102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292e8d3dd1%3A0xf15f5aad773c112b!2zVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1744628837625!5m2!1svi!2s"                  width="300" 
-                  height="200" 
-                  style={{border: 0}}
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                  <iframe
+                    src = { ggMap }
+                    width="400"
+                    height="300"
+                    style={{ border: 0 }}
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </div>
-              </div>
-              
             </div>
           </div>
           <MailList />
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };

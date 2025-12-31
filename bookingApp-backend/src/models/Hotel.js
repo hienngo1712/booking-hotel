@@ -53,6 +53,9 @@ const HotelSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    ggMap: {
+        type: String
+    }
 })
 
 export default mongoose.model('Hotel', HotelSchema);
